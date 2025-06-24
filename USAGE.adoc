@@ -1,0 +1,31 @@
+= Usage
+
+== Setup
+
+Configure the `.env.local` file as:
+
+[source]
+----
+KEYCLOAK_CLIENT_ID="travel-portal"
+KEYCLOAK_CLIENT_SECRET="<insert secret>>"
+KEYCLOAK_ISSUER="http://localhost:8080/realms/travel-application"
+NEXTAUTH_URL="http://localhost:3000"
+NEXTAUTH_SECRET="<insert secret>"
+----
+
+For `NEXTAUTH_SECRET`, create a secret by running the following command and add it to `.env.local`. This secret is used to sign and encrypt cookies.
+
+[source,bash]
+----
+$ openssl rand -base64 32
+NZR9+V24pUHtEmrBbhKRHQt56I2fXOhzpGnj7NyOvTM=
+$
+----
+
+
+== References
+
+* https://medium.com/inspiredbrilliance/implementing-authentication-in-next-js-v13-application-with-keycloak-part-1-f4817c53c7ef[Next Auth Part 1]
+* https://medium.com/inspiredbrilliance/implementing-authentication-in-next-js-v13-application-with-keycloak-part-2-6f68406bb3b5[Next Auth Part 2]
+
+
