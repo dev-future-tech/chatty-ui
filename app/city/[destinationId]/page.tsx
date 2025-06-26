@@ -6,7 +6,7 @@ interface CityProps {
     }
 }
 export default async function City({ params } : CityProps) {
-    const { destinationId} = params;
+    const { destinationId} = await params;
 
     return (
         <CityOverview destinationId={destinationId} />
