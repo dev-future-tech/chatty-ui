@@ -27,5 +27,7 @@ $
 
 * https://medium.com/inspiredbrilliance/implementing-authentication-in-next-js-v13-application-with-keycloak-part-1-f4817c53c7ef[Next Auth Part 1]
 * https://medium.com/inspiredbrilliance/implementing-authentication-in-next-js-v13-application-with-keycloak-part-2-6f68406bb3b5[Next Auth Part 2]
+* https://medium.com/@a.pirus/how-to-create-a-responsive-navigation-bar-in-next-js-13-e5540789a017[Reactive Navitgation Bar]
+
 
 

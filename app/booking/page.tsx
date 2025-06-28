@@ -1,24 +1,34 @@
-import { FormEvent } from 'react'
+"use client";
+import { fetch_destinations } from "../api/trip_api"
+import DestinationSelection from './DestinatonSelection';
+import BookingForm from "./BookingForm";
+import { useEffect, useState } from "react";
+import { Destination } from "trips/utils";
+import { getSession } from "next-auth/react";
+import { BookingProvider } from "./context";
 
-export default async function Booking() {
+export default function Booking() {
+    const [destinations, setDestinations] = useState<Destination[]>([]);
 
-    async function onSubmit(event: FormEvent<HTMLFormElement>) {
-        const formData = new FormData(event.currentTarget)
-        const response = await fetch('/api/submit', {
-            method: 'POST',
-            body: formData,
-        });
- 
-    // Handle response if necessary
-        const data = await response.json()
+    const get_destinations = async () => {
+        const sessionLocal = await getSession()
+        const token = sessionLocal?.accessToken;
+        const values = await fetch_destinations(token);
+        setDestinations(values);
     }
+    useEffect( () => {
+        get_destinations();
+    }, []);
 
     return (
         <>
-        <form onSubmit={onSubmit}>
             <input name="query" />
-            <button type="submit">Submit</button>
-        </form>
+            <BookingProvider>
+            <BookingForm>
+                <DestinationSelection destinationSelection={destinations}></DestinationSelection>
+            </BookingForm>
+            </BookingProvider>
+            
         </>
     )
 }

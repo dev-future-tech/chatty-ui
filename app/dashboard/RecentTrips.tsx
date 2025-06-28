@@ -9,7 +9,6 @@ interface RecentTripsProps {
 
 export default async function RecentTrips({customerId, count=10} : RecentTripsProps) {
     const session = await getServerSession(authOptions);
-
     const trips = await fetch_customer_trips(customerId, count, session?.accessToken);
 
     return (

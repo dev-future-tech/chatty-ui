@@ -1,3 +1,5 @@
+'use server';
+
 import { Destination, Trip } from "trips/utils";
 
 function getHeaders(sessionToken?: string) {

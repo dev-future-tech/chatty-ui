@@ -15,5 +15,5 @@ export default async function handler(
 }
 
 async function createItem(data : MyForm) {
-    
+    console.log(data);
 }
