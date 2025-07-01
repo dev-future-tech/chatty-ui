@@ -21,6 +21,11 @@ export default async function NavBar() {
                 </Link>
               </li>
               <li>
+                <Link href="/booking">
+                  <p>Book a Trip</p>
+                </Link>
+              </li>
+              <li>
                 <Link href="/contacts">
                   <p>Contacts</p>
                 </Link>

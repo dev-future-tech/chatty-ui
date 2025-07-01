@@ -1,47 +1,28 @@
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, useContext } from "react";
+import { BookingContext, BookingContextType } from "./context";
 
 
-interface FormData {
-    month: number;
-    day: number;
-    year: number;
-}
-
-interface Month {
-    id: number;
-    name: string;
-}
-
-const MONTHS : Month[] = [
-    { id: 1, name: "January"},
-    { id: 2, name: "February"},
-    { id: 3, name: "March"},
-    { id: 4, name: "April"},
-    { id: 5, name: "May"},
-    { id: 6, name: "June"},
-    { id: 7, name: "July"},
-    { id: 8, name: "August"},
-    { id: 9, name: "September"},
-    { id: 10, name: "October"},
-    { id: 11, name: "November"},
-    { id: 12, name: "December"}
-];
 
 export default function DatePicker() {
-    const [formData, setFormData] = useState<FormData>({ month: 0, day: 0, year: 0 });
+    const { setStartDate, setEndDate } = useContext(BookingContext) as BookingContextType;
 
-    function handleChange(event: ChangeEvent<HTMLSelectElement>) {
+    function handleChange(event: ChangeEvent<HTMLInputElement>) {
         const {name, value} = event.target;
-        setFormData(prevData => ({ ...prevData, [name]: value }));
+        if(name === "startDate") setStartDate(value);
+        if(name === "endDate") setEndDate(value);
     };
 
-    return <>
-    <select name="month" onChange={handleChange}>
-        {MONTHS.map( (month) => (
-            <option key={month.id} value={month.id}>{month.name}</option>
-        ))}
-    </select>
-    <select name="day" onChange={handleChange}></select>
-    <select name="year" onChange={handleChange}></select>
+    return (
+    <>
+        <div className="mb-4">
+            <label htmlFor="startDate" className="block text-gray-700 text-sm font-bold mb-2">Start Date</label>
+            <input type="date" name="startDate" id="startDate" onChange={handleChange} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"/>
+        </div>
+
+        <div className="mb-6">
+            <label htmlFor="endDate" className="block text-gray-700 text-sm font-bold mb-2">End Date</label>
+            <input type="date" name="endDate" id="endDate" onChange={handleChange} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"/>
+        </div>
     </>
+    )
 }

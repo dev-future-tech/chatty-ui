@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import { Destination } from "trips/utils";
 import { getSession } from "next-auth/react";
 import { BookingProvider } from "./context";
+import DatePicker from "./DatePicker";
 
 export default function Booking() {
     const [destinations, setDestinations] = useState<Destination[]>([]);
@@ -22,10 +23,10 @@ export default function Booking() {
 
     return (
         <>
-            <input name="query" />
             <BookingProvider>
             <BookingForm>
                 <DestinationSelection destinationSelection={destinations}></DestinationSelection>
+                <DatePicker></DatePicker>
             </BookingForm>
             </BookingProvider>
             
