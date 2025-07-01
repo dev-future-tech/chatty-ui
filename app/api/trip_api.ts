@@ -1,6 +1,6 @@
 'use server';
 
-import { Destination, Trip } from "trips/utils";
+import { BookingRequest, Destination, Trip } from "trips/utils";
 
 function getHeaders(sessionToken?: string) {
         const headers: HeadersInit = {
@@ -46,4 +46,19 @@ export async function fetch_customer_trips(customerId: number, count: number, se
     });
     const vals = await results.json() as Promise<Trip[]>;
     return vals;
+}
+
+
+export async function save_booking(request: BookingRequest, sessionToken: string | undefined) {
+    const headers = getHeaders(sessionToken);
+
+
+    const options : RequestInit = {
+        method: "POST",
+        headers: headers,
+        body: JSON.stringify(request)
+    };
+
+    const response = await fetch(`http://localhost:8070/booking`, options)
+    return response.headers.get("Location");
 }

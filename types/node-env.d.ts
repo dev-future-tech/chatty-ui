@@ -20,4 +20,10 @@ declare module "trips/utils" {
       city: string
       description: string
     };
+    interface BookingRequest {
+      email: string | null | undefined
+      destination_id: number
+      start_date: string
+      end_date: string
+  } ;
 }
