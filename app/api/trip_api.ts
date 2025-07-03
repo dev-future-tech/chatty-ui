@@ -1,6 +1,6 @@
 'use server';
 
-import { BookingRequest, Destination, Trip } from "trips/utils";
+import { BookingRequest, Destination, FlightRequest, Trip } from "trips/utils";
 
 function getHeaders(sessionToken?: string) {
         const headers: HeadersInit = {
@@ -61,4 +61,53 @@ export async function save_booking(request: BookingRequest, sessionToken: string
 
     const response = await fetch(`http://localhost:8070/booking`, options)
     return response.headers.get("Location");
+}
+
+export async function listAirports(sessionToken: string | undefined) {
+    const headers = getHeaders(sessionToken);
+
+    const options : RequestInit = {
+        method: "GET",
+        headers: headers,
+    };
+
+        const response = await fetch(`http://localhost:8070/airport`, options);
+
+    if(!response.ok) {
+        if (response.status === 400) {
+            console.log("Bad request");
+            return []
+        } else
+        if (response.status === 404) {
+            console.log("Not Found error");
+            return [];
+        }
+    } else {
+        return (await response).json();
+    }
+
+}
+
+export async function listFlights(flightRequest: FlightRequest, sessionToken: string | undefined) {
+    const headers = getHeaders(sessionToken);
+
+    const options : RequestInit = {
+        method: "GET",
+        headers: headers,
+    };
+
+    const response = await fetch(`http://localhost:8070/flight?airport_id=${flightRequest.origin_id}`, options);
+
+    if(!response.ok) {
+        if (response.status === 400) {
+            console.log("Bad request");
+            return []
+        } else
+        if (response.status === 404) {
+            console.log("Not Found error");
+            return [];
+        }
+    } else {
+        return (await response).json();
+    }
 }

@@ -23,7 +23,33 @@ declare module "trips/utils" {
     interface BookingRequest {
       email: string | null | undefined
       destination_id: number
+      origin_id?: number
       start_date: string
       end_date: string
-  } ;
+    };
+    type FlightRequest = Partial<BookingRequest>;
+    interface Layover {
+      destinationId: number
+      estLayoverTime: number
+    };
+    interface Airport {
+      airport_id: number
+      airport_name: string
+      timezone: string
+    };
+    interface Flight {
+      id: number
+      airline: string
+      origin: Destination
+      destination: Destination
+      airport: Airport
+      departure_date: string
+      departure_time: string
+      arrival_date: string
+      arrival_time: string
+      layOvers: Layover[]
+    };
+    interface FlightResponse {
+      flights: Flight[]
+    };
 }

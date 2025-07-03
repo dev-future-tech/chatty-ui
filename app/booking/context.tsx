@@ -7,6 +7,8 @@ export interface BookingContextType {
     setStartDate: (startDate: string) => void;
     endDate: string;
     setEndDate: (endDate: string) => void;
+    airportId: number;
+    setAirportId: (airportId: number) => void;
 }
 
 export const BookingContext = createContext<BookingContextType | null>(null);
@@ -15,6 +17,7 @@ export const BookingProvider = ({ children }: { children: ReactNode }) => {
   const [destinationId, setDestinationId] = useState<number>(-1);
   const [startDate, setStartDate] = useState<string>("");
   const [endDate, setEndDate] = useState<string>("");
+  const [airportId, setAirportId] = useState<number>(-1);
    
   const contextValue : BookingContextType = {
     destinationId,
@@ -22,7 +25,9 @@ export const BookingProvider = ({ children }: { children: ReactNode }) => {
     startDate,
     setStartDate,
     endDate,
-    setEndDate
+    setEndDate,
+    airportId,
+    setAirportId
 
   }
   return (

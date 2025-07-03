@@ -26,7 +26,7 @@ export default function DestinationSelection({destinationSelection} :  Destinati
     return (
         <div className="max-w-xs md:max-w-lg mx-auto">
                 <div className="inline-block relative w-64 mb-10">
-                    <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="gender">
+                    <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="destination">
                         Destination
                     </label>
                     <select className="block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" name='destination' value={data?.destination_id} onChange={handleChange}>
