@@ -21,15 +21,21 @@ export default function AirportSelection({ session_token } : AirportProps) {
         setAirportId(Number(event.target.value));
     }
 
-    const getAirports = async(token: string) => {
-        const results = await listAirports(token);
-        setAirports(results);
-    }
 
     useEffect( () => {
+        const getAirports = async(token: string) => {
+            const results = await listAirports(token);
+            setAirports(results);
+        }
+
         if(session_token)
             getAirports(session_token);
-    }, [session_token]);
+    }, [setAirportId, session_token]);
+
+    useEffect( () => {
+            setAirportId(airports[0]?.airport_id);
+
+    }, [setAirportId, airports]);
 
     return <>
         <div className="max-w-xs md:max-w-lg mx-auto">

@@ -17,8 +17,10 @@ export default function Booking() {
     const get_destinations = async () => {
         const sessionLocal = await getSession()
         const token = sessionLocal?.accessToken;
-        const values = await fetch_destinations(token);
-        setDestinations(values);
+        await fetch_destinations(token).then(values => {
+            setDestinations(values);
+        });
+
     }
     useEffect( () => {
         get_destinations();
