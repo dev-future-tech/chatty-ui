@@ -1,5 +1,5 @@
 import { getServerSession } from 'next-auth';
-import { authOptions } from '@/app/api/auth/[...nextauth]/route';
+import { authOptions } from '@/app/config/authOptions';
 import Logout from '@/app/components/Logout';
 import Login from '@/app/components/Login';
 

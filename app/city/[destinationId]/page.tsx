@@ -1,9 +1,9 @@
 import CityOverview from "@/app/city/CityOverview";
 
 interface CityProps {
-    params: {
+    params: Promise<{
         destinationId: number;
-    }
+    }>
 }
 export default async function City({ params } : CityProps) {
     const { destinationId} = await params;

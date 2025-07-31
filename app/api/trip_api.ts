@@ -18,7 +18,7 @@ export async function fetch_destination(destinationId: number, sessionToken?: st
     const headers = getHeaders(sessionToken);
 
     const destinations = await fetch(`http://localhost:8070/destinations/${destinationId}`, {
-        headers
+        headers: headers
     });
     const results = await destinations.json() as Promise<Destination>
     return results;
@@ -29,7 +29,7 @@ export async function fetch_destinations(sessionToken?: string) {
     const headers = getHeaders(sessionToken);
 
     const destinations = await fetch(`http://localhost:8070/destinations`, {
-        headers
+        headers: headers
     });
     const results = await destinations.json() as Promise<Destination[]>
     return results;
@@ -42,10 +42,12 @@ export async function fetch_customer_trips(customerId: number, count: number, se
 
 
     const results = await fetch(`http://localhost:8070/booking/${customerId}`, {
-        headers
+        headers: headers
+    }).then( res => {
+        return res.json();
     });
-    const vals = await results.json() as Promise<Trip[]>;
-    return vals;
+
+    return results as Promise<Trip[]>;
 }
 
 

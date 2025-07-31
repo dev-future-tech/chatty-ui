@@ -1,6 +1,6 @@
 import { getServerSession } from 'next-auth';
 import Logout from '@/app/components/Logout';
-import { authOptions } from '@/app/api/auth/[...nextauth]/route';
+import { authOptions } from '@/app/config/authOptions';
 
 export default async function Private() {
   const session = await getServerSession(authOptions)

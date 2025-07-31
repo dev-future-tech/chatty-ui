@@ -1,7 +1,7 @@
 "use server";
 
-import { getServerSession } from 'next-auth'
-import { authOptions } from '@/app/api/auth/[...nextauth]/route'
+import { getServerSession } from 'next-auth';
+import { authOptions } from '@/app/config/authOptions';
 import { fetch_destinations } from "../api/trip_api"
 import Display from "./Display";
 

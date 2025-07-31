@@ -28,13 +28,16 @@ export default function Booking() {
 
     return (
         <>
+            <h1 className="mb-4 text-4xl font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-6xl dark:text-white">Search Flights</h1>
             <BookingProvider>
-            <BookingForm>
-                <AirportSelection session_token={session?.accessToken}></AirportSelection>
-                <DestinationSelection destinationSelection={destinations}></DestinationSelection>
-                <DatePicker></DatePicker>
-            </BookingForm>
-            <Flights email={session?.user?.email} session_token={session?.accessToken}></Flights>
+            <div className="w-full h-auto border border-gray-300 mt-20 flex">
+                <BookingForm>
+                    <AirportSelection session_token={session?.accessToken}></AirportSelection>
+                    <DestinationSelection destinationSelection={destinations}></DestinationSelection>
+                    <DatePicker></DatePicker>
+                </BookingForm>
+                <Flights email={session?.user?.email} session_token={session?.accessToken}></Flights>
+            </div>
             </BookingProvider>
             
         </>

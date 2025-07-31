@@ -1,5 +1,5 @@
-import { getServerSession } from 'next-auth'
-import { authOptions } from '@/app/api/auth/[...nextauth]/route'
+import { getServerSession } from 'next-auth';
+import { authOptions } from '@/app/config/authOptions';
 import { fetch_destination } from '../api/trip_api';
 import Image from 'next/image'
 

@@ -8,6 +8,7 @@ declare module "next-auth/jwt" {
     refreshToken?: string
     expiresAt?: number
     error?: string
+    roles?: string
   }
 }
 

@@ -1,25 +1,16 @@
+"use client";
+
 import ChatDialog from "./ui/ChatDialog";
-import { getServerSession } from 'next-auth'
-import { authOptions } from './api/auth/[...nextauth]/route'
-import Login from './components/Login'
 import Logout from './components/Logout'
+import { useSession } from "next-auth/react";
 
-export default async function Home() {
-  const session = await getServerSession(authOptions)
-
-  if(session) {
-    return (
-    <div>
-      <div>Your name is {session.user?.name}</div>
-      <ChatDialog />
-      <div><Logout /> </div>
-    </div>
-    );
-  } else {
+export default function Home() {
+    const { data: session } = useSession();
     return (
       <div>
-        <Login />
+        <div>Your name is {session?.user?.name}</div>
+        <ChatDialog />
+        <div><Logout /> </div>
       </div>
     );
-  }
 }

@@ -1,33 +1,49 @@
+"use client";
 import { fetch_destinations } from "../api/trip_api"
-import { getServerSession } from 'next-auth'
-import { authOptions } from '@/app/api/auth/[...nextauth]/route'
 import Link from 'next/link';
+import { useEffect, useState } from "react";
+import { useSession } from "next-auth/react";
+import { Destination } from "trips/utils";
 
-export default async function Destinations() {
+export default function Destinations() {
+    const [ destinations, setDestinations] = useState<Destination[]>([]);
 
-    const session = await getServerSession(authOptions);
-    const destinations = await fetch_destinations(session?.accessToken);
+    const { data: session } = useSession();
+    const accessToken = session?.accessToken === undefined ? '' : session.accessToken;
+
+    useEffect( () => {
+        const getDestinations = async (token: string) => {
+            await fetch_destinations(token).then(data => {
+                setDestinations(data);
+            });
+        };
+
+        if(accessToken) {
+            getDestinations(accessToken);
+        }
+
+    }, [accessToken]);
 
     return (
         <>
-        Where we fly!!
-        <table>
+        <h2 className="text-4xl font-extrabold dark:text-white">Where we fly!!</h2>
+        <table className="table-auto w-full border-collapse border border-gray-300">
             <thead>
-                <tr>
-                <th>City</th>
-                <th>Description</th>
+                <tr className="bg-gray-100">
+                    <th className="border border-gray-300 px-4 py-2 text-left">City</th>
+                    <th className="border border-gray-300 px-4 py-2 text-left">Description</th>
                 </tr>
             </thead>
             <tbody>
             {destinations &&
                 destinations.map((destination) => (
-                    <tr key={destination.destination_id}>
-                        <td>
+                    <tr key={destination.destination_id} className="hover:bg-gray-200">
+                        <td className="border border-gray-300 px-4 py-2">
                             <Link href={`/city/${destination.destination_id}`}>
                             {destination.city}
                             </Link>
                             </td>
-                        <td>{destination.description}</td>
+                        <td className="border border-gray-300 px-4 py-2">{destination.description}</td>
                     </tr>
             ))}
             </tbody>
